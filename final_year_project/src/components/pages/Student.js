@@ -1,9 +1,8 @@
 import layoutStudent from './Student.module.css';
 
-
 function Student() {
     return (
-    <section>
+        <section>
         <h1>Student Detail</h1>
         <table className={layoutStudent.table}>
             <thead>
@@ -31,6 +30,9 @@ function Student() {
             </tbody>
         </table>
     </section>
+
+
+
     );
 }
 

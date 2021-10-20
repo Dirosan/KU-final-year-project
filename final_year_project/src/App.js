@@ -1,15 +1,15 @@
 import { Route, Switch } from 'react-router-dom';
-
-import Home from './pages/Home';
-import Student from './pages/Student';
-import Attendance from './pages/Attendance';
-import Main from './layout/Main';
+import Layout from './components/layout/Layout';
+import Home from './components/pages/Home';
+import Student from './components/pages/Student';
+import Attendance from './components/pages/Attendance';
+import Module from './components/pages/Module';
+import ContactUs from './components/pages/ContactUs';
 
 
 function App() {
   return (
-    <div>
-      <Main />
+    <Layout>
       <Switch> 
         <Route path='/' exact>
           <Home />
@@ -20,8 +20,14 @@ function App() {
         <Route path='/attendance'>
           <Attendance />
         </Route>
+        <Route path='/module'>
+          <Module />
+        </Route>
+        <Route path='/ContactUS'>
+          <ContactUs />
+        </Route>
       </Switch>
-    </div>
+    </Layout>
   );
 }
 

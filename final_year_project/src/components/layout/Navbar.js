@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import layout from './Main.module.css';
+import navbar from './Navbar.module.css'
 
-function Main() {
+function Navbar() {
     return (
-    <header className={layout.header}>
-        <div className={layout.logo}>Kingston University</div>
-        <nav>
+        <nav className={navbar.Navbar}>
             <ul>
                 <li>
                     <Link to='/'>Home</Link>
@@ -17,10 +15,15 @@ function Main() {
                 <li>
                     <Link to='/attendance'>Attendance</Link>
                 </li>
+                <li>
+                    <Link to='/module'>Module</Link>
+                </li>
+                <li>
+                    <Link to='/contactus'>Contact Us</Link>
+                </li>
             </ul>
         </nav>
-    </header>
     );
 }
 
-export default Main;
+export default Navbar;
