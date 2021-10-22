@@ -3,7 +3,7 @@ import layoutStudent from './Student.module.css';
 function Student() {
     return (
         <section>
-        <h1>Student Detail</h1>
+        {/* <h1>Student Detail</h1> */}
         <table className={layoutStudent.table}>
             <thead>
                 <tr>
