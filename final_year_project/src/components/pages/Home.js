@@ -1,4 +1,4 @@
-import layoutHome from './Home.module.css';
+import layoutHome from './Home.scss';
 
 function Home() {
     return (

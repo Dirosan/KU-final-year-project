@@ -1,4 +1,4 @@
-import layoutStudent from './Student.module.css';
+import layoutStudent from './Student.scss';
 
 function Student() {
     return (

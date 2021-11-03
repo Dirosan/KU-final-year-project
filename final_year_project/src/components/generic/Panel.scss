@@ -1,0 +1,79 @@
+
+@import '../../global'; // Global SCSS Styling
+
+
+.PanelContainer {
+  display: grid;
+  grid-gap: 7px;
+}
+
+article.StaticPanel,
+article.Panel {
+  border-radius: 3px;
+}
+
+article.Panel {
+// height: 100%;
+width: 100%;
+
+
+
+  // Panel Header --------------------------------
+  header.PanelHeader {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // Panel Body ----------------------------------
+  main.PanelBody {
+    padding: 7px;
+    display: grid;
+    grid-gap: 7px;
+  
+    &:empty { padding: 0px; }
+  }
+
+  // Collapse Styles -----------------------------
+
+  // Default: Panel is open
+  img.OpenIcon { display: none; }
+  img.CloseIcon { display: block; }
+
+  img{
+      height: 50px;
+      width: auto;
+  }
+  
+  // Panel with class "PanelClosed": Panel is closed
+  &.PanelClosed {
+    img.OpenIcon { display: block; }
+    img.CloseIcon { display: none; }
+    main.PanelBody { display: none; }
+  }
+}
+
+@mixin PanelStyling($mainValue,$fontValue,$staticValue,$textCase,$fontWeight,$letterSpacing) {
+  border: 1px solid GetColor($mainValue);
+  &.Panel .PanelHeader { 
+    background: GetColor($mainValue); 
+    color: GetColor($fontValue); 
+    text-transform: $textCase;
+    font-weight: $fontWeight; 
+    letter-spacing: $letterSpacing;
+  }
+  &.StaticPanel .PanelHeader { 
+    background: White;
+    color: GetColor($staticValue);
+    text-transform: uppercase;
+    font-weight: $fontWeight; 
+    letter-spacing: $letterSpacing;
+  }
+  .PanelColor { color: GetColor($mainValue); font-weight: $fontWeight - 100; }
+}
+
+.PanelLevel1 { @include PanelStyling(1,11,0,uppercase,600,1.2px); }
+.PanelLevel2 { @include PanelStyling(2,12,1,none,     500,1.0px); }
+.PanelLevel3 { @include PanelStyling(6, 1,2,none,     400,0.5px); }
+.PanelLevel4 { @include PanelStyling(7, 2,3,none,     300,0.2px); }
+.PanelLevel5 { @include PanelStyling(8, 3,4,none,     200,0.0px); }
