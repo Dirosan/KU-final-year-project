@@ -1,101 +1,36 @@
-import { Panel, StaticPanel } from '../generic/Panel';
+import { useState, useEffect } from 'react';
+import { apiRequestWithKey } from '../api/apiRequestWithKey';
+import Modules from '../pages/Mymodule';
+
+const API_URL = 'https://my.api.mockaroo.com/';
+const API_KEY = '?key=bb6adbc0';
 
 function Module() {
-    const StutyingModule = [
-        {
-            Title: "Individual Project",
-            Code: "CI6600",
-            Studying: [
-                { Activity: "Lecture",  Percentage:  "40%", Hours:  20, Attendance: 100},
-                { Activity: "Workshops",  Percentage: "100%", Hours:  30, Attendance: 100 },
-                { Activity: "Assessment", Percentage:  "40%", Hours: 130, Attendance: 100 }
-            ]
-        },
-        {
-            Title: "Advanced Data Modelling",
-            Code: "CI6230",
-            Studying: [
-                { Activity: "Lecture",  Percentage:  "40%", Hours:  20, Attendance: 100 },
-                { Activity: "Workshops",  Percentage: "100%", Hours:  30, Attendance: 100 },
-                { Activity: "Assessment", Percentage:  "40%", Hours: 130, Attendance: 100 }
-            ]
-        },
-        {
-            Title: "Mobile Application Development",
-            Code: "CI6330",
-            Studying: [
-                { Activity: "Lecture",  Percentage:  "40%", Hours:  20, Attendance: 100 },
-                { Activity: "Workshops",  Percentage: "100%", Hours:  30, Attendance: 100 },
-                { Activity: "Assessment", Percentage:  "40%", Hours: 130, Attendance: 100 }
-            ]
-        },
-        {
-            Title: "Software Development Practice",
-            Code: "CI6250",
-            Studying: [
-                { Activity: "Lecture",  Percentage:  "40%", Hours:  20, Attendance: 100 },
-                { Activity: "Workshops",  Percentage: "100%", Hours:  30, Attendance: 100 },
-                { Activity: "Assessment", Percentage:  "40%", Hours: 130, Attendance: 100 }
-            ]
-        },
-    ];
+  // Hooks ---------------------------------------
+  const [loadingMessage, setLoadingMessage] = useState("Loading records ...");
+  const [Modules, setModules] = useState(null);
 
+  useEffect(() => { fetchModules(); }, []);
 
-const computeTotalOfModuleHours = ((moduleObj) => {
-    return moduleObj.Studying.reduce((total, activity) => total + activity.Hours, 0);
-  });
-  
-  
+  // Methods -------------------------------------
+  const fetchModules = async () => {
+    const outcome = await apiRequestWithKey(API_URL,API_KEY,'Modules');
+    if (outcome.success) setModules(outcome.response);
+    else setLoadingMessage("Modules could not be found.");
+  }
+
+  // View ----------------------------------------
   return (
     <section>
-      {/* <h1>Module</h1> */}
-      <div className="PanelContainer">
-
-        <Panel title="Module Studying" level="1" initialState="1">
-          {
-            StutyingModule.map((moduleObj) => {
-              return (
-                <Panel
-                  key={moduleObj.Code}
-                  title={moduleObj.Title + " (" + moduleObj.Code + ")"}
-                  level="2"
-                  initialState="1"
-                >
-                  <StaticPanel level="3">
-                    <table>
-                      <tr>
-                        <th className="AlignColLeft">Activity</th>
-                        <th className="AlignColCenter">Percentage</th>
-                        <th className="AlignColRight">Hours</th>
-                        <th className="AlignColRight">Attendance</th> 
-                      </tr>
-                      {
-                        moduleObj.Studying.map((activityObj) => {
-                          return (
-                            <tr>
-                              <td className="AlignColLeft">  {activityObj.Activity}  </td>
-                              <td className="AlignColCenter">{activityObj.Percentage}</td>
-                              <td className="AlignColRight"> {activityObj.Hours}     </td>
-                              <td className="AlignColRight"> {activityObj.Attendance}     </td>
-                            </tr>
-                          );
-                        })
-                      }
-                      <tr>
-                        <td className="AlignColLeft">Total</td>
-                        <td className="AlignColCenter">&nbsp;</td>
-                        <td className="AlignColRight">{ computeTotalOfModuleHours(moduleObj) }</td>
-                      </tr>
-                    </table>
-                  </StaticPanel>
-                </Panel>
-              );
-            })
-          }
-        </Panel>
-      </div>
+      <h1>All Modules</h1>
+      { 
+         !Modules 
+            ? <p>{loadingMessage}</p>
+            : <Modules list={Modules} />
+      }
     </section>
   );
 }
+
 
 export default Module;
