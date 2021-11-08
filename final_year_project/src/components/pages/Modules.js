@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiRequestWithKey } from '../api/apiRequestWithKey';
-import Modules from '../pages/Mymodule';
+import { Panel } from '../generic/Panel';
 
 const API_URL = 'https://my.api.mockaroo.com/';
 const API_KEY = '?key=bb6adbc0';
@@ -8,7 +8,7 @@ const API_KEY = '?key=bb6adbc0';
 function Module() {
   // Hooks ---------------------------------------
   const [loadingMessage, setLoadingMessage] = useState("Loading records ...");
-  const [Modules, setModules] = useState(null);
+  const [Modules, setModules] = useState([]);
 
   useEffect(() => { fetchModules(); }, []);
 
@@ -22,12 +22,21 @@ function Module() {
   // View ----------------------------------------
   return (
     <section>
+      <Panel>
       <h1>All Modules</h1>
-      { 
-         !Modules 
-            ? <p>{loadingMessage}</p>
-            : <Modules list={Modules} />
+      {
+        Modules.map((project) =>(
+          <tr>
+            <td>{project.ModuleID}</td>
+            <td>{project.ModuleName}</td>
+            <td>{project.ModuleCode}</td>
+            <td>{project.ModuleLevel}</td>
+            <td>{project.ModuleLeaderID}</td>
+            <td><img src={project.ModuleImage}/></td>
+          </tr>
+        ))
       }
+      </Panel>
     </section>
   );
 }

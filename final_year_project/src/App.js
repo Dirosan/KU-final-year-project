@@ -3,7 +3,7 @@ import Layout from './components/layout/Layout';
 import Home from './components/pages/Home';
 import Student from './components/pages/Student';
 import Attendance from './components/pages/Attendance';
-import Module from './components/pages/Module';
+import Module from './components/pages/Modules';
 import ContactUs from './components/pages/ContactUs';
 
 
