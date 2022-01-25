@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { apiRequestWithKey } from '../api/apiRequestWithKey';
-import { Panel } from '../generic/Panel';
 
 const API_URL = 'https://my.api.mockaroo.com/';
 const API_KEY = '?key=bb6adbc0';
@@ -22,7 +21,7 @@ function Module() {
   // View ----------------------------------------
   return (
     <section>
-      <Panel>
+      <table>
       <h1>All Modules</h1>
       {
         Modules.map((project) =>(
@@ -36,7 +35,7 @@ function Module() {
           </tr>
         ))
       }
-      </Panel>
+      </table>
     </section>
   );
 }
